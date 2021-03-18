@@ -24,8 +24,6 @@ public class AbonentController {
     @GetMapping("{id}")
     public List<Abonent> getAbonentById(@PathVariable String id){
         return abonentService.getAbonentListById();
-//                .filter(abonentService -> abonentService.get("id").equals(id))
-//                .findFirst();
     }
 
 
