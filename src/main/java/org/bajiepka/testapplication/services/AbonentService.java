@@ -26,11 +26,7 @@ public class AbonentService {
                 dto.getName(),
                 dto.getLastName(),
                 Integer.parseInt(dto.getClientAge()),
-                0L,
-                Integer.parseInt(dto.getPostalCode()),
-                "",
-                "",
-                "");
+                0L);
         return abonentRepository.save(abonent);
     }
 

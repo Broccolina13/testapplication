@@ -11,20 +11,12 @@ public class Abonent {
                    String name,
                    String lastName,
                    int age,
-                   Long balance,
-                   Integer postCode,
-                   String city,
-                   String street,
-                   String house) {
+                   Long balance) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.age = age;
         this.balance = balance;
-        this.postCode = postCode;
-        this.city = city;
-        this.street = street;
-        this.house = house;
     }
 
     public static final int MINIMUM_ABONENT_AGE = 16;
@@ -35,10 +27,15 @@ public class Abonent {
     private String lastName;
     private int age;
     private Long balance;
-    private Integer postCode;
-    private String city;
-    private String street;
-    private String house;
+    private List<String> addresses;
+
+    public List<String> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<String> addresses) {
+        this.addresses = addresses;
+    }
 
     private List<CreateMeterCountRequestDTO> counts = new ArrayList<>();
 
@@ -60,25 +57,7 @@ public class Abonent {
         return balance < 0;
     }
 
-    public boolean isAbonentIsKerchAbonent() {
-        int kerchIndex1 = 298300;
-        int kerchIndex2 = 298302;
-        return postCode == kerchIndex1 || postCode == kerchIndex2;
-    }
 
-    public boolean isOsadchi() {
-        return postCode == 999999;
-    }
-
-    public String getFullAdress() {
-//        return String.format("%s, город %s, улица %s, дом %d",
-//                postCode,   // 1
-//                city,       // 2
-//                street,     // 3
-//                house);     // 4
-
-        return postCode + ", г. " + city + ", ул. " + street + ", д. " + house + ".";
-    }
 
     public String getId() {
         return id;
