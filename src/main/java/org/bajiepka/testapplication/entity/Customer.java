@@ -1,17 +1,17 @@
 package org.bajiepka.testapplication.entity;
 
-import org.bajiepka.testapplication.dto.meter.count.CreateMeterCountRequestDTO;
+import org.bajiepka.testapplication.dto.CreateMeterRequest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Abonent {
+public class Customer {
 
-    public Abonent(String id,
-                   String name,
-                   String lastName,
-                   int age,
-                   Long balance) {
+    public Customer(String id,
+                    String name,
+                    String lastName,
+                    int age,
+                    Long balance) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
@@ -37,7 +37,7 @@ public class Abonent {
         this.addresses = addresses;
     }
 
-    private List<CreateMeterCountRequestDTO> counts = new ArrayList<>();
+    private List<CreateMeterRequest> counts = new ArrayList<>();
 
     public String getFIO() {
         return lastName + " " + name;

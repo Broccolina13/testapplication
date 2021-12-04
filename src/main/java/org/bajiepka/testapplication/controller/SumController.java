@@ -7,13 +7,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("sum")
+@RequestMapping("${api.version}/sum")
 public class SumController {
 
-    @Autowired
-    private SumService sumService;
+    private final SumService sumService;
 
-    //  Метод, который возвращает сумму стоимости по показания (показание * цену)
+    public SumController(SumService sumService) {
+        this.sumService = sumService;
+    }
+
     @GetMapping
     public Integer calculateMeterSum(){
         return sumService.calculateMeterSum();

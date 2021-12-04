@@ -5,17 +5,19 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.4.2</version>
+        <version>2.6.0</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+
     <groupId>org.bajiepka</groupId>
-    <artifactId>testapplication</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
-    <name>testapplication</name>
-    <description>Demo project for Spring Boot</description>
+    <artifactId>komunalka</artifactId>
+    <version>0.0.2</version>
+    <name>komunalka</name>
+    <description>Учёт коммунальных услуг</description>
     <properties>
-        <java.version>11</java.version>
+        <java.version>17</java.version>
     </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -24,13 +26,7 @@
 
         <dependency>
             <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>3.0.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
+            <artifactId>springfox-boot-starter</artifactId>
             <version>3.0.0</version>
         </dependency>
 
@@ -50,5 +46,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>

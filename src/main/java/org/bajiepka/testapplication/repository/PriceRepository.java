@@ -1,7 +1,6 @@
 package org.bajiepka.testapplication.repository;
 
-import org.bajiepka.testapplication.dto.price.CreatePriceRequestDTO;
-import org.bajiepka.testapplication.dto.price.Price;
+import org.bajiepka.testapplication.dto.Price;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;

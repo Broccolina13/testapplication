@@ -7,17 +7,17 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AbonentTest {
+class CustomerTest {
     @Test
     public void adressTest(){
-        Abonent abonent = new Abonent("", "", "", 0,null);
-        List<String> expectedAddresses = abonent.getAddresses();
+        Customer customer = new Customer("", "", "", 0,null);
+        List<String> expectedAddresses = customer.getAddresses();
         assertNull(expectedAddresses);
     }
     @Test
     public void addressNotEmptyTest(){
-        Abonent abonent = new Abonent("", "", "", 0,null);
-        abonent.setAddresses(new ArrayList<>());
-        assertTrue(abonent.getAddresses().isEmpty());
+        Customer customer = new Customer("", "", "", 0,null);
+        customer.setAddresses(new ArrayList<>());
+        assertTrue(customer.getAddresses().isEmpty());
     }
 }

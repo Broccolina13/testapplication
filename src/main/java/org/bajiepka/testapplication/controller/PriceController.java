@@ -1,9 +1,8 @@
 package org.bajiepka.testapplication.controller;
 
-import org.bajiepka.testapplication.dto.price.CreatePriceRequestDTO;
-import org.bajiepka.testapplication.dto.price.Price;
+import org.bajiepka.testapplication.dto.CreatePriceRequest;
+import org.bajiepka.testapplication.dto.Price;
 import org.bajiepka.testapplication.services.PriceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,18 +11,21 @@ import java.util.List;
     Контроллер, который нужен для того, чтобы принимать запрос
  */
 @RestController
-@RequestMapping("price")
+@RequestMapping("${api.version}/price")
 public class PriceController {
 
-    @Autowired
-    private PriceService priceService;
+    private final PriceService priceService;
+
+    public PriceController(PriceService priceService) {
+        this.priceService = priceService;
+    }
 
     @GetMapping
     public List<Price> getPrices() {
         return priceService.getPrices();
     }
     @PostMapping
-    public String addPrice(@RequestBody CreatePriceRequestDTO dto) {
+    public String addPrice(@RequestBody CreatePriceRequest dto) {
         return priceService.addPrice(dto);
     }
     @DeleteMapping
