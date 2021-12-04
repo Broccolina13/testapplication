@@ -1,0 +1,14 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /komunalka
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  application:
+    name: komunalka
+
+api:
+  version: /api/v1

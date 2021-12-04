@@ -1,0 +1,9 @@
+version: "3.7"
+
+services:
+
+  komunalka:
+    image: kr4/komunalka
+    container_name: komunalka_app
+    ports:
+      - "80:8080"

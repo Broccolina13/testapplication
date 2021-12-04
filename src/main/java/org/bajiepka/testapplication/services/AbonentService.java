@@ -16,7 +16,7 @@ public class AbonentService {
     private AbonentRepository abonentRepository;
 
     //  TODO реализовать метод, который будет получать из репозитория абонента по коду
-    public List<Abonent> getAbonentListById() {
+    public List<Abonent> getAbonents() {
         return abonentRepository.getAbonentById();
     }
 

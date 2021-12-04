@@ -12,21 +12,14 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("meter")
+@RequestMapping("${api.version}/meter")
 public class MeterCountController {
 
-    @Autowired
-    private MeterCountService meterCountService;
+    private final MeterCountService meterCountService;
 
-    //  REST - restful api
-    //  ------------------
-    //  GET - получение
-    //  POST - создание
-    //  PUT - изменение
-    //  PATCH - изменение
-    //  DELETE - удаление
-
-
+    public MeterCountController(MeterCountService meterCountService) {
+        this.meterCountService = meterCountService;
+    }
 
     @GetMapping
     public List<CreateMeterCountRequestDTO> getAllCounts() {
@@ -37,5 +30,4 @@ public class MeterCountController {
     public String addNewMeterCount(@RequestBody CreateMeterCountRequestDTO dto) {
         return meterCountService.addNewMeterCount(dto);
     }
-
 }

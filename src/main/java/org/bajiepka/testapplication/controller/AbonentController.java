@@ -1,29 +1,40 @@
 package org.bajiepka.testapplication.controller;
 
+import io.swagger.annotations.Example;
+import io.swagger.annotations.ExampleProperty;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import org.bajiepka.testapplication.dto.abonent.CreateAbonentDTO;
 import org.bajiepka.testapplication.entity.Abonent;
 import org.bajiepka.testapplication.services.AbonentService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("abonent")
+@RequestMapping("${api.version}/abonent")
 public class AbonentController {
 
-    @Autowired
-    private AbonentService abonentService;
+    private final AbonentService abonentService;
 
-    //  TODO реализовать get метод, который получит из постмана айдишку и запросит по ней абонента в сервисе
+    public AbonentController(AbonentService abonentService) {
+        this.abonentService = abonentService;
+    }
+
+    @Operation(summary = "Список абонентов", description = "Описание")
     @GetMapping
-    public List<Abonent> getAbonentById() {
-        return abonentService.getAbonentListById();
+    public List<Abonent> getAbonents() {
+        return abonentService.getAbonents();
     }
 
     @GetMapping("{id}")
-    public List<Abonent> getAbonentById(@PathVariable String id){
-        return abonentService.getAbonentListById();
+    public List<Abonent> getAbonents(
+            @PathVariable
+            @Parameter(
+                    name = "Уникальный идентификатор абонента",
+                    example = "1000-2010"
+            ) String id){
+        return abonentService.getAbonents();
     }
 
 

@@ -12,11 +12,14 @@ import java.util.List;
     Контроллер, который нужен для того, чтобы принимать запрос
  */
 @RestController
-@RequestMapping("price")
+@RequestMapping("${api.version}/price")
 public class PriceController {
 
-    @Autowired
-    private PriceService priceService;
+    private final PriceService priceService;
+
+    public PriceController(PriceService priceService) {
+        this.priceService = priceService;
+    }
 
     @GetMapping
     public List<Price> getPrices() {
