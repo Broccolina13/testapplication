@@ -1,8 +1,7 @@
 package org.bajiepka.testapplication.controller;
 
-import org.bajiepka.testapplication.dto.meter.count.CreateMeterCountRequestDTO;
+import org.bajiepka.testapplication.dto.CreateMeterRequest;
 import org.bajiepka.testapplication.services.MeterCountService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,12 +21,12 @@ public class MeterCountController {
     }
 
     @GetMapping
-    public List<CreateMeterCountRequestDTO> getAllCounts() {
+    public List<CreateMeterRequest> getAllCounts() {
         return meterCountService.getAllCount();
     }
 
     @PostMapping
-    public String addNewMeterCount(@RequestBody CreateMeterCountRequestDTO dto) {
+    public String addNewMeterCount(@RequestBody CreateMeterRequest dto) {
         return meterCountService.addNewMeterCount(dto);
     }
 }

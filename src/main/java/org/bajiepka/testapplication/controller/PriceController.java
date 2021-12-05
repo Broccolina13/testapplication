@@ -1,9 +1,8 @@
 package org.bajiepka.testapplication.controller;
 
-import org.bajiepka.testapplication.dto.price.CreatePriceRequestDTO;
-import org.bajiepka.testapplication.dto.price.Price;
+import org.bajiepka.testapplication.dto.CreatePriceRequest;
+import org.bajiepka.testapplication.dto.Price;
 import org.bajiepka.testapplication.services.PriceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +25,7 @@ public class PriceController {
         return priceService.getPrices();
     }
     @PostMapping
-    public String addPrice(@RequestBody CreatePriceRequestDTO dto) {
+    public String addPrice(@RequestBody CreatePriceRequest dto) {
         return priceService.addPrice(dto);
     }
     @DeleteMapping
