@@ -1,4 +1,4 @@
-package org.bajiepka.testapplication.controller;
+package org.bajiepka.testapplication.controller.rest;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

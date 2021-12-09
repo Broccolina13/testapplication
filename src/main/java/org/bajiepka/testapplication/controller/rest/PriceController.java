@@ -1,4 +1,4 @@
-package org.bajiepka.testapplication.controller;
+package org.bajiepka.testapplication.controller.rest;
 
 import org.bajiepka.testapplication.dto.CreatePriceRequest;
 import org.bajiepka.testapplication.dto.Price;
