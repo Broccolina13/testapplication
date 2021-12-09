@@ -22,7 +22,7 @@ public class CurrencyService {
     private CurrencyItem toCurrencyItem(Currency currency) {
         return new CurrencyItem(
                 currency.getCode(),
-                currency.getLabel(),
+                currency.name(),
                 currency.getDescription());
     }
 }
