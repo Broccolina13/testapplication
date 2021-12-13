@@ -36,6 +36,7 @@
 
     <div class="row">
         <div class="col-md-4 mt-5">
+            <h3>Используемые валюты.</h3>
             <table id="example" class="table table-bordered" style="width: 100%">
                 <thead>
                 <tr>
@@ -49,9 +50,9 @@
                     th:style="${iStat.odd}? 'background-color: #FFFCF9;'"
                     th:alt-title="${iStat.even}? 'even' : 'odd'">
 
-                    <td th:text="${currencyItem.id()}"/>
-                    <td th:text="${currencyItem.name()}"/>
-                    <td th:text="${currencyItem.description()}"/>
+                    <td th:text="${currencyItem.id()}"></td>
+                    <td th:text="${currencyItem.name()}"></td>
+                    <td th:text="${currencyItem.description()}"></td>
                 </tr>
                 </tbody>
             </table>
@@ -60,8 +61,8 @@
 
     <div class="row">
         <div class="col-md-4 mt-5">
-            <h2>Стиомость водоснабжения с https://voda.crimea.ru/</h2>
-            <table id="water_tariffs" class="table table-bordered" style="width: 100%">
+            <h3>Стоимость водоснабжения.</h3>
+            <table id="in_water_tariffs" class="table table-bordered" style="width: 100%">
                 <thead>
                 <tr>
                     <th>Действует с</th>
@@ -70,13 +71,33 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="tariffItem, iStat : ${waterData}"
+                <tr th:each="tariffItem, iStat : ${waterItems.in()}"
                     th:style="${iStat.odd}? 'background-color: #FFFCF9;'"
                     th:alt-title="${iStat.even}? 'even' : 'odd'">
 
-                    <td th:text="${tariffItem.start()}"/>
-                    <td th:text="${tariffItem.end()}"/>
-                    <td th:text="${tariffItem.cost()}"/>
+                    <td th:text="${tariffItem.start()}" th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                    <td th:text="${tariffItem.end()}" th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                    <td th:text="${tariffItem.cost()}" th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                </tr>
+                </tbody>
+            </table>
+            <h3>Стоимость водоотведения.</h3>
+            <table id="out_water_tariffs" class="table table-bordered" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>Действует с</th>
+                    <th>Действует по</th>
+                    <th>Стоимость</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="tariffItem, iStat : ${waterItems.out()}"
+                    th:style="${iStat.odd}? 'background-color: #FFFCF9;'"
+                    th:alt-title="${iStat.even}? 'even' : 'odd'">
+
+                    <td th:text="${tariffItem.start()}" th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                    <td th:text="${tariffItem.end()}" th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                    <td th:text="${tariffItem.cost()}" th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
                 </tr>
                 </tbody>
             </table>
