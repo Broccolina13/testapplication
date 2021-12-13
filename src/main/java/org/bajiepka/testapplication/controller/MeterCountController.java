@@ -1,5 +1,7 @@
 package org.bajiepka.testapplication.controller;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.v3.oas.annotations.Operation;
 import org.bajiepka.testapplication.dto.CreateMeterRequest;
 import org.bajiepka.testapplication.services.MeterCountService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -20,11 +22,13 @@ public class MeterCountController {
         this.meterCountService = meterCountService;
     }
 
+    @ApiOperation(value = "Показания счётчиков")
     @GetMapping
     public List<CreateMeterRequest> getAllCounts() {
         return meterCountService.getAllCount();
     }
 
+    @ApiOperation(value = "Внести показания стётчиков")
     @PostMapping
     public String addNewMeterCount(@RequestBody CreateMeterRequest dto) {
         return meterCountService.addNewMeterCount(dto);

@@ -1,5 +1,6 @@
 package org.bajiepka.testapplication.controller;
 
+import io.swagger.annotations.ApiOperation;
 import org.bajiepka.testapplication.services.SumService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +17,7 @@ public class SumController {
         this.sumService = sumService;
     }
 
+    @ApiOperation(value = "Расчёт стоимости ЖКУ")
     @GetMapping
     public Integer calculateMeterSum(){
         return sumService.calculateMeterSum();
