@@ -25,6 +25,7 @@ public class HomeController {
     public String main(Model model) {
         model.addAttribute("currencyData", currencyService.getCurrencies());
         model.addAttribute("waterItems", waterTariffManager.getItems(DEFAULT_VODA_CRIMEA_LOCATION));
+        model.addAttribute("currencyRate", currencyService.getCurrencyRate());
         return "index";
     }
 }
