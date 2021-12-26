@@ -12,3 +12,7 @@ spring:
 
 api:
   version: /api/v1
+
+http:
+  currate:
+    api-key: f496f28e86ec97168c39b9ce1920de38
