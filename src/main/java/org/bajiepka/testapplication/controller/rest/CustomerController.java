@@ -37,7 +37,7 @@ public class CustomerController {
 
     @PostMapping
     public String addAbonent(@RequestBody CreateCustomerRequest dto){
-        return customerService.createAbonent(dto);
+        return customerService.createCustomer(dto);
     }
 }
 

@@ -19,7 +19,7 @@ public class CustomerService {
         return customerRepository.getAbonentById();
     }
 
-    public String createAbonent(CreateCustomerRequest dto){
+    public String createCustomer(CreateCustomerRequest dto){
 
         Customer customer = new Customer("",
                 dto.name(),

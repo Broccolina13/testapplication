@@ -32,8 +32,7 @@ public class VodaCrimeaSiteParser extends AbstractSiteParser {
     private final static String KERCH_LOCATION_COLUMN = "г. Керчь";
     private final static String TARIFF_TAB_SELECT = "table[class=tarif-tab]";
     private final static int PEOPLE_TARIFF_INDEX = 1;
-    private final static int IN_DURATION_INDEX = 6;
-    private final static int OUT_DURATION_INDEX = 5;
+    private final static int DURATION_COLUMN_INDEX = 4;
 
     public WaterItems parseSiteData(VodaCrimeaLocation vodaCrimeaLocation) {
 
@@ -45,9 +44,9 @@ public class VodaCrimeaSiteParser extends AbstractSiteParser {
         Element waterIn = Objects.requireNonNull(waterTariffs.first(), "Отсутствуют тарифы на водоснабжение.");
         Element waterOut = Objects.requireNonNull(waterTariffs.last(), "Отсутствуют тарифы на водоотведение.");
 
-        return new WaterItems(
-                extractTariffRows(waterIn.getElementsByTag(TABLE_ROW), IN_DURATION_INDEX),
-                extractTariffRows(waterOut.getElementsByTag(TABLE_ROW), OUT_DURATION_INDEX));
+        List<TariffItem> in = extractTariffRows(waterIn.getElementsByTag(TABLE_ROW), DURATION_COLUMN_INDEX);
+        List<TariffItem> out = extractTariffRows(waterOut.getElementsByTag(TABLE_ROW), DURATION_COLUMN_INDEX);
+        return new WaterItems(in, out);
     }
 
     private List<TariffItem> extractTariffRows(List<Element> inTariffRows, int durationIndex) {

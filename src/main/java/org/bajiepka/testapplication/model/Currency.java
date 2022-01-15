@@ -5,7 +5,8 @@ public enum Currency {
     EUR(978L, "Euro", "Евро"),
     RUB(643L, "Russian ruble", "Российский рубль"),
     UAH(980L, "Ukrainian hryvna", "Украинская гривна"),
-    USD(840L, "United States dollar", "Американский доллар");
+    USD(840L, "United States dollar", "Американский доллар"),
+    BHD(933L, "Belarussian Ruble", "Беларусский рубль");
 
     Currency(
             Long currencyCode,
@@ -23,6 +24,10 @@ public enum Currency {
 
     public String getLabel() {
         return label;
+    }
+
+    public static Currency getBaseCurrency() {
+        return RUB;
     }
 
     public Long getCode() {
