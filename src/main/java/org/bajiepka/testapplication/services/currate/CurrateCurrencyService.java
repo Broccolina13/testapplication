@@ -1,8 +1,9 @@
 package org.bajiepka.testapplication.services.currate;
 
+import org.bajiepka.testapplication.formdata.CurrencyFormData;
+import org.bajiepka.testapplication.formdata.mapper.CurrateFormDataMapper;
 import org.bajiepka.testapplication.model.Currency;
 import org.bajiepka.testapplication.model.CurrencyItem;
-import org.bajiepka.testapplication.model.RateItem;
 import org.bajiepka.testapplication.services.Url;
 import org.bajiepka.testapplication.services.currate.model.CurrateCurrencyRatesResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,11 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.Instant;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -25,11 +22,13 @@ public class CurrateCurrencyService {
     @Value("${http.currate.api-key}")
     private String apiKey;
     private final RestTemplate restTemplate;
+    private final CurrateFormDataMapper currateFormDataMapper;
 
     public CurrateCurrencyService(
-            @Qualifier("currateRestTemplate") RestTemplate restTemplate
-    ) {
+            @Qualifier("currateRestTemplate") RestTemplate restTemplate,
+            CurrateFormDataMapper currateFormDataMapper) {
         this.restTemplate = restTemplate;
+        this.currateFormDataMapper = currateFormDataMapper;
     }
 
     public List<CurrencyItem> getCurrencies() {
@@ -39,26 +38,17 @@ public class CurrateCurrencyService {
                 .collect(Collectors.toList());
     }
 
-    public List<RateItem> getCurrencyRate() {
+    public CurrencyFormData getCurrencyRate() {
         CurrateCurrencyRatesResponse response = restTemplate.getForObject(
                 Url.CURRATE_RU_RATES_URL,
                 CurrateCurrencyRatesResponse.class,
                 getCurrencyRateVariables()
         );
 
-        if (response == null) throw new IllegalStateException("Мы ничего не получили от апи курсов валют!");
-
-        List<RateItem> currencyRates = new ArrayList<>();
-        for (Map.Entry<String, Float> entry : response.data().entrySet()) {
-            currencyRates.add(new RateItem(
-                    entry.getKey().substring(0, 3),
-                    entry.getKey().substring(3, 6),
-                    entry.getValue(),
-                    Instant.now()
-            ));
-        }
-
-        return currencyRates;
+        return Optional
+                .ofNullable(response)
+                .map(currateFormDataMapper::mapToFormData)
+                .orElseThrow(() -> new IllegalStateException("Мы ничего не получили от апи курсов валют!"));
     }
 
     private String generateCurrencyPairs() {
@@ -72,7 +62,7 @@ public class CurrateCurrencyService {
             if (currentCurrency.equals(Currency.RUB)) {
                 continue;
             } else {
-                generatedPairList.add(Currency.getBaseCurrency().name() + currentCurrency.name());
+                generatedPairList.add(currentCurrency.name() + Currency.getBaseCurrency().name());
             }
         }
 

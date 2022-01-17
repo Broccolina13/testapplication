@@ -36,7 +36,7 @@
 
     <div class="row">
         <div class="col-md-4 mt-5">
-            <h3>Используемые валюты.</h3>
+            <h4>Используемые валюты.</h4>
             <table id="example" class="table table-bordered" style="width: 100%">
                 <thead>
                 <tr>
@@ -61,7 +61,7 @@
 
     <div class="row">
         <div class="col-md-4 mt-5">
-            <h3>Стоимость водоснабжения.</h3>
+            <h4>Стоимость водоснабжения.</h4>
             <table id="in_water_tariffs" class="table table-bordered" style="width: 100%">
                 <thead>
                 <tr>
@@ -75,13 +75,19 @@
                     th:style="${iStat.odd}? 'background-color: #FFFCF9;'"
                     th:alt-title="${iStat.even}? 'even' : 'odd'">
 
-                    <td th:text="${tariffItem.start()}" th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
-                    <td th:text="${tariffItem.end()}" th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
-                    <td th:text="${tariffItem.cost()}" th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                    <td th:text="${tariffItem.start()}"
+                        th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                    <td th:text="${tariffItem.end()}"
+                        th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                    <td th:text="${tariffItem.cost()}"
+                        th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
                 </tr>
                 </tbody>
             </table>
-            <h3>Стоимость водоотведения.</h3>
+        </div>
+
+        <div class="col-md-4 mt-5">
+            <h4>Стоимость водоотведения.</h4>
             <table id="out_water_tariffs" class="table table-bordered" style="width: 100%">
                 <thead>
                 <tr>
@@ -95,23 +101,36 @@
                     th:style="${iStat.odd}? 'background-color: #FFFCF9;'"
                     th:alt-title="${iStat.even}? 'even' : 'odd'">
 
-                    <td th:text="${tariffItem.start()}" th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
-                    <td th:text="${tariffItem.end()}" th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
-                    <td th:text="${tariffItem.cost()}" th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                    <td th:text="${tariffItem.start()}"
+                        th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                    <td th:text="${tariffItem.end()}"
+                        th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                    <td th:text="${tariffItem.cost()}"
+                        th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
                 </tr>
                 </tbody>
             </table>
-            <h3>Курс валют.</h3>
+        </div>
+
+        <div class="col-md-4 mt-5">
+            <h4 th:text="${currencyRate.getFormHeader()}">This is welcome to greet</h4>
             <table id="current_rate" class="table table-bordered" style="width: 100%">
                 <thead>
                 <tr>
-                    <th>Валюта</th>
                     <th>Наименование</th>
+                    <th>Код</th>
                     <th>Курс</th>
                 </tr>
                 </thead>
                 <tbody>
-                <a th:text="${currencyRate}"></a>
+                <tr th:each="rateItem, iStat : ${currencyRate.rates()}"
+                    th:style="${iStat.odd}? 'background-color: #FFFCF9;'"
+                    th:alt-title="${iStat.even}? 'even' : 'odd'">
+
+                    <td th:text="${rateItem.srcCurrency()}"></td>
+                    <td th:text="${rateItem.srcCurrency().getCode()}"></td>
+                    <td th:text="${rateItem.currencyRate()}"></td>
+                </tr>
                 </tbody>
             </table>
         </div>
