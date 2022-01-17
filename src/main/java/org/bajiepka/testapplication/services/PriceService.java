@@ -1,7 +1,7 @@
 package org.bajiepka.testapplication.services;
 
-import org.bajiepka.testapplication.dto.price.CreatePriceRequestDTO;
-import org.bajiepka.testapplication.dto.price.Price;
+import org.bajiepka.testapplication.dto.CreatePriceRequest;
+import org.bajiepka.testapplication.dto.Price;
 import org.bajiepka.testapplication.repository.PriceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,8 +18,8 @@ public class PriceService {
         return priceRepository.getAllPrices();
     }
 
-    public String addPrice(CreatePriceRequestDTO dto) {
-        Price price = new Price(dto.getPrice());
+    public String addPrice(CreatePriceRequest dto) {
+        Price price = new Price(dto.price());
         priceRepository.addPrice(price);
         return "Цена добавлена";
     }

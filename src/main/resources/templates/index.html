@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Spring boot - komunalka application.</title>
+
+    <link th:rel="stylesheet" th:href="@{assets/select2-develop/dist/css/select2.css}"/>
+    <link th:rel="stylesheet" th:href="@{assets/select2-bootstrap4-theme-master/dist/select2-bootstrap4.css}"/>
+    <link th:rel="stylesheet" th:href="@{webjars/bootstrap/5.1.3/css/bootstrap.min.css} "/>
+
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark static-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">Страница выбора валюты</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive"
+                aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Домой
+                        <span class="sr-only">(текущая)</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+
+    <div class="row">
+        <div class="col-md-4 mt-5">
+            <h4>Используемые валюты.</h4>
+            <table id="example" class="table table-bordered" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>Код</th>
+                    <th>Наименование</th>
+                    <th>Описание</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="currencyItem, iStat : ${currencyData}"
+                    th:style="${iStat.odd}? 'background-color: #FFFCF9;'"
+                    th:alt-title="${iStat.even}? 'even' : 'odd'">
+
+                    <td th:text="${currencyItem.id()}"></td>
+                    <td th:text="${currencyItem.name()}"></td>
+                    <td th:text="${currencyItem.description()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mt-5">
+            <h4>Стоимость водоснабжения.</h4>
+            <table id="in_water_tariffs" class="table table-bordered" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>Действует с</th>
+                    <th>Действует по</th>
+                    <th>Стоимость</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="tariffItem, iStat : ${waterItems.in()}"
+                    th:style="${iStat.odd}? 'background-color: #FFFCF9;'"
+                    th:alt-title="${iStat.even}? 'even' : 'odd'">
+
+                    <td th:text="${tariffItem.start()}"
+                        th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                    <td th:text="${tariffItem.end()}"
+                        th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                    <td th:text="${tariffItem.cost()}"
+                        th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4 mt-5">
+            <h4>Стоимость водоотведения.</h4>
+            <table id="out_water_tariffs" class="table table-bordered" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>Действует с</th>
+                    <th>Действует по</th>
+                    <th>Стоимость</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="tariffItem, iStat : ${waterItems.out()}"
+                    th:style="${iStat.odd}? 'background-color: #FFFCF9;'"
+                    th:alt-title="${iStat.even}? 'even' : 'odd'">
+
+                    <td th:text="${tariffItem.start()}"
+                        th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                    <td th:text="${tariffItem.end()}"
+                        th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                    <td th:text="${tariffItem.cost()}"
+                        th:style="${tariffItem.isCurrent()}? 'background-color: #ADFFB4;'"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="col-md-4 mt-5">
+            <h4 th:text="${currencyRate.getFormHeader()}">This is welcome to greet</h4>
+            <table id="current_rate" class="table table-bordered" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>Наименование</th>
+                    <th>Код</th>
+                    <th>Курс</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="rateItem, iStat : ${currencyRate.rates()}"
+                    th:style="${iStat.odd}? 'background-color: #FFFCF9;'"
+                    th:alt-title="${iStat.even}? 'even' : 'odd'">
+
+                    <td th:text="${rateItem.srcCurrency()}"></td>
+                    <td th:text="${rateItem.srcCurrency().getCode()}"></td>
+                    <td th:text="${rateItem.currencyRate()}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+</body>
+</html>
