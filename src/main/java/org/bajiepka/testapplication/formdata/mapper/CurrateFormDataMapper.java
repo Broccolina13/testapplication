@@ -1,5 +1,6 @@
 package org.bajiepka.testapplication.formdata.mapper;
 
+import javafx.collections.transformation.SortedList;
 import org.bajiepka.testapplication.formdata.CurrencyFormData;
 import org.bajiepka.testapplication.model.Currency;
 import org.bajiepka.testapplication.model.RateItem;
@@ -7,9 +8,8 @@ import org.bajiepka.testapplication.services.currate.model.CurrateCurrencyRatesR
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Компонент предназначен для обработки ответа от серсиса currate.ru
@@ -23,6 +23,8 @@ public class CurrateFormDataMapper {
 
     public CurrencyFormData mapToFormData(CurrateCurrencyRatesResponse response) {
         List<RateItem> currencyRates = new ArrayList<>();
+        Currency[] currencies = Currency.values();
+        Comparator<Currency> currenciesCodeComparator = Comparator.comparing(Currency::getCode);
         for (Map.Entry<String, Float> entry : response.data().entrySet()) {
             currencyRates.add(
                     new RateItem(
@@ -31,7 +33,13 @@ public class CurrateFormDataMapper {
                             entry.getValue(),
                             Instant.now()
                     ));
+
+            Arrays.sort(currencies, currenciesCodeComparator);
+
         }
+
+
+
         return new CurrencyFormData(
                 Currency.getBaseCurrency(),
                 currencyRates);
@@ -46,4 +54,6 @@ public class CurrateFormDataMapper {
         String symbols = value.substring(SOURCE_CURRENCY_END_PREFIX, DEST_CURRENCY_END_PREFIX);
         return Currency.valueOf(symbols);
     }
+
+
 }

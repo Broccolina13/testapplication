@@ -4,6 +4,7 @@ import org.bajiepka.testapplication.formdata.CurrencyFormData;
 import org.bajiepka.testapplication.formdata.mapper.CurrateFormDataMapper;
 import org.bajiepka.testapplication.model.Currency;
 import org.bajiepka.testapplication.model.CurrencyItem;
+import org.bajiepka.testapplication.model.RateItem;
 import org.bajiepka.testapplication.services.Url;
 import org.bajiepka.testapplication.services.currate.model.CurrateCurrencyRatesResponse;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import javax.xml.catalog.Catalog;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -37,6 +39,17 @@ public class CurrateCurrencyService {
                 .sorted(Comparator.comparing(CurrencyItem::id))
                 .collect(Collectors.toList());
     }
+
+//    public void sortedByCode() {
+//        Currency[] currencies = Currency.values();
+//        Comparator<Currency> currenciesCodeComparator
+//                = Comparator.comparingLong(Currency::getCode);
+//
+//        Arrays.sort(currencies, currenciesCodeComparator);
+//
+//        .stream().sorted(Comparator.comparingLong(Currency::getCode))
+//    }
+//
 
     public CurrencyFormData getCurrencyRate() {
         CurrateCurrencyRatesResponse response = restTemplate.getForObject(
