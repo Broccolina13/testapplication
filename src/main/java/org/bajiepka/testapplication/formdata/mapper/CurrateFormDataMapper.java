@@ -23,8 +23,6 @@ public class CurrateFormDataMapper {
 
     public CurrencyFormData mapToFormData(CurrateCurrencyRatesResponse response) {
         List<RateItem> currencyRates = new ArrayList<>();
-        Currency[] currencies = Currency.values();
-        Comparator<Currency> currenciesCodeComparator = Comparator.comparing(Currency::getCode);
         for (Map.Entry<String, Float> entry : response.data().entrySet()) {
             currencyRates.add(
                     new RateItem(
@@ -33,12 +31,8 @@ public class CurrateFormDataMapper {
                             entry.getValue(),
                             Instant.now()
                     ));
-
-            Arrays.sort(currencies, currenciesCodeComparator);
-
         }
-
-
+        currencyRates.sort(Comparator.comparing( rateItem -> rateItem.srcCurrency().getCode()));
 
         return new CurrencyFormData(
                 Currency.getBaseCurrency(),
@@ -54,6 +48,4 @@ public class CurrateFormDataMapper {
         String symbols = value.substring(SOURCE_CURRENCY_END_PREFIX, DEST_CURRENCY_END_PREFIX);
         return Currency.valueOf(symbols);
     }
-
-
 }

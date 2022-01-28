@@ -30,10 +30,6 @@ public enum Currency {
         return RUB;
     }
 
-//    public static Long getCode(){
-//        return getBaseCurrency().code;
-//    }
-
     public Long getCode() {
         return code;
     }
