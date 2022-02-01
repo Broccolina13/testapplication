@@ -37,5 +37,6 @@ public enum Currency {
     public String getDescription() {
         return description;
     }
+
 }
 
