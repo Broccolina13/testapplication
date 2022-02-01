@@ -1,5 +1,9 @@
 package org.bajiepka.testapplication.controller.rest;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import org.bajiepka.testapplication.dto.CreateCustomerRequest;
@@ -8,6 +12,7 @@ import org.bajiepka.testapplication.services.CustomerService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("${api.version}/customers")
@@ -19,12 +24,13 @@ public class CustomerController {
         this.customerService = customerService;
     }
 
-    @Operation(summary = "Список абонентов", description = "Описание")
+    @ApiOperation(value = "Список абонентов", produces = "application/json")
     @GetMapping
     public List<Customer> getCustomers() {
         return customerService.getCustomers();
     }
 
+    @ApiOperation(value = "Получить список абонентов по id")
     @GetMapping("{id}")
     public List<Customer> getCustomers(
             @PathVariable
@@ -35,6 +41,7 @@ public class CustomerController {
         return customerService.getCustomers();
     }
 
+    @ApiOperation(value = "Добавить нового абонента")
     @PostMapping
     public String addAbonent(@RequestBody CreateCustomerRequest dto){
         return customerService.createCustomer(dto);

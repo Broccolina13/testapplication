@@ -1,5 +1,6 @@
 package org.bajiepka.testapplication.controller.rest;
 
+import io.swagger.annotations.ApiOperation;
 import org.bajiepka.testapplication.dto.CreatePriceRequest;
 import org.bajiepka.testapplication.dto.Price;
 import org.bajiepka.testapplication.services.PriceService;
@@ -20,14 +21,19 @@ public class PriceController {
         this.priceService = priceService;
     }
 
+    @ApiOperation(value = "Перечень тарифов")
     @GetMapping
     public List<Price> getPrices() {
         return priceService.getPrices();
     }
+
+    @ApiOperation(value = "Заполнить тариф")
     @PostMapping
     public String addPrice(@RequestBody CreatePriceRequest dto) {
         return priceService.addPrice(dto);
     }
+
+    @ApiOperation(value = "Очистить тарифы")
     @DeleteMapping
     public String deleteAllPrices(){
         return priceService.deletePrices();
